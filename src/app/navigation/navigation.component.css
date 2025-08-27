@@ -1,84 +1,102 @@
 nav {
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--main-x-padding);
-  background: #232847; /* Changed from transparent */
+  padding: 0 1rem; /* Consistent horizontal padding */
+  background: transparent;
   position: fixed;
-  top: 0;
-  left: 0;
+  padding: 0 var(--nav-padding, 5rem);
   width: 100%;
-  height: 64px; /* Added */
+  height: var(--nav-height, 5rem);
   z-index: 100;
+  box-sizing: border-box;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-family: "ApercuBold", Arial, sans-serif;
+.logo img {
+  height: 2rem;
+  max-width: 60px;
+  width: auto;
+  display: block;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  margin-left: auto; /* Push links to the right */
+  flex-shrink: 1;
+  min-width: 0; /* Allow shrinking */
+  flex-wrap: wrap; /* Allow wrapping if needed */
+  overflow: hidden;
+}
+
+.nav-links a {
   color: #fff;
   text-decoration: none;
+  font-size: 1rem;
+  white-space: nowrap; /* Prevent text from wrapping */
+  text-overflow: ellipsis; /* Add ellipsis for overflowed text */
+  overflow: hidden; /* Hide overflowed text */
+  box-sizing: border-box;
+  padding: 1rem 1rem;
+}
+
+.nav-links a:hover,
+.nav-links a:active {
+  background-color: #fff;
+  color: #232847;
+  /* padding: 2rem; */
 }
 
 .burger {
   display: none;
   flex-direction: column;
   justify-content: center;
-  width: 2rem;
-  height: 2rem;
+  align-items: center;
+
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 101;
+  z-index: 200;
 }
 
-.burger span {
-  display: block;
-  height: 3px;
-  width: 24px;
-  background: #fff;
-  margin: 4px 0;
-  border-radius: 2px;
-  transition: 0.3s;
+.burger i {
+  font-size: 1.5rem;
+  color: #fff;
+  pointer-events: none; /* So the button, not the icon, handles clicks */
 }
 
-.nav-links {
-  display: flex;
-  gap: 1.5rem;
-  align-items: center;
-}
-
+/* Mobile styles */
 @media (max-width: 768px) {
-  .burger {
-    display: flex;
+  nav {
+    padding: 0 1rem;
   }
   .nav-links {
     position: fixed;
-    top: 64px; /* Adjust to your nav height */
+    top: var(--nav-height, 5rem);
     right: 0;
+    width: 200px;
+    height: calc(100vh - var(--nav-height, 5rem));
     background: #232847;
     flex-direction: column;
     align-items: flex-end;
-    width: 200px;
-    height: calc(100vh - 64px);
-    padding: 2rem 1rem;
-    gap: 1.5rem;
+    gap: 1rem;
+    padding: 1rem 1rem;
     transform: translateX(100%);
     transition: transform 0.3s ease;
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
-    z-index: 100;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+    z-index: 150;
+    overflow-y: auto;
+    margin-left: 0; /* Remove auto margin on mobile */
   }
   .nav-links.open {
     transform: translateX(0);
   }
-}
-
-@media (max-width: 480px) {
-  .logo {
-    font-size: 1.1rem;
+  .burger {
+    display: flex;
   }
-  .nav-links {
-    width: 100vw;
-    align-items: flex-start;
-    padding-left: 2rem;
+  .nav-links a {
+    font-size: 1rem;
   }
 }

@@ -1,15 +1,14 @@
 <nav>
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-        class="logo">benjaminFester</a>
+    <a routerLink="/" class="logo">
+        <img src="benjaminfester.svg" alt="benjaminFester logo" />
+    </a>
     <button class="burger" (click)="toggleMenu()" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
+        <i [ngClass]="menuOpen ? 'fas fa-times' : 'fas fa-bars'"></i>
     </button>
     <div class="nav-links" [class.open]="menuOpen">
         <a routerLink="/about" routerLinkActive="active">About</a>
         <a routerLink="/contact" routerLinkActive="active">Contact</a>
-        <a href="https://github.com/benjaminfester/" target="_blank" rel="noopener" class="github-link">
+        <a href="https://github.com/benjaminfester/" target="_blank" rel="noopener">
             <i class="fab fa-github"></i>
         </a>
     </div>

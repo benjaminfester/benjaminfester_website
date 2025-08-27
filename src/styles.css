@@ -1,8 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 :root {
-  --main-x-padding: 15rem;
+  --main-x-padding: 5rem;
   --nav-height: 5rem;
+  --nav-padding: 5rem;
 }
 
 @font-face {
@@ -48,4 +49,10 @@ h1 {
   margin-top: var(--nav-height);
   padding: 2rem var(--main-x-padding);
   box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding: 1rem 1rem;
+  }
 }

@@ -1,0 +1,16 @@
+<nav>
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        class="logo">benjaminFester</a>
+    <button class="burger" (click)="toggleMenu()" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div class="nav-links" [class.open]="menuOpen">
+        <a routerLink="/about" routerLinkActive="active">About</a>
+        <a routerLink="/contact" routerLinkActive="active">Contact</a>
+        <a href="https://github.com/benjaminfester/" target="_blank" rel="noopener" class="github-link">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+</nav>

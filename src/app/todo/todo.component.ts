@@ -1,4 +1,5 @@
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, ElementRef, computed, effect, inject, signal, viewChild } from '@angular/core';
+import { FabService } from '../fab.service';
 
 interface Todo {
   id: number;
@@ -16,11 +17,17 @@ const STORAGE_KEY = 'todo-items';
 })
 export class TodoComponent {
   items = signal<Todo[]>(this.load());
+  private readonly newItem = viewChild.required<ElementRef<HTMLInputElement>>('newItem');
 
   readonly open = computed(() => this.items().filter((t) => !t.done));
   readonly done = computed(() => this.items().filter((t) => t.done));
 
   constructor() {
+    inject(FabService).register(() => ({
+      icon: 'plus',
+      label: 'Add to-do',
+      run: () => this.newItem().nativeElement.focus(),
+    }));
     effect(() => {
       try {
         localStorage.setItem(STORAGE_KEY, JSON.stringify(this.items()));

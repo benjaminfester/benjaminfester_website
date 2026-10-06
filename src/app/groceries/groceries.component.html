@@ -1,8 +1,8 @@
-<main class="groceries">
+<main class="groceries stagger">
   <h1>Groceries</h1>
 
   <form class="add" (submit)="$event.preventDefault(); add(newItem)">
-    <input #newItem type="text" placeholder="Milk, eggs, bread…" aria-label="New grocery item" autocomplete="off" enterkeyhint="done" />
+    <input #newItem class="input" type="text" placeholder="Milk, eggs, bread…" aria-label="New grocery item" autocomplete="off" enterkeyhint="done" />
     <button type="submit" class="btn primary">Add</button>
   </form>
 

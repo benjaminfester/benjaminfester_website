@@ -1,8 +1,8 @@
-<main class="todo">
+<main class="todo stagger">
   <h1>To do</h1>
 
   <form class="add" (submit)="$event.preventDefault(); add(newItem)">
-    <input #newItem type="text" placeholder="Add something…" aria-label="New to-do" autocomplete="off" />
+    <input #newItem class="input" type="text" placeholder="Add something…" aria-label="New to-do" autocomplete="off" />
     <button type="submit" class="btn primary">Add</button>
   </form>
 

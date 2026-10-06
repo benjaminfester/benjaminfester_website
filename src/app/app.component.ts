@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { FabService } from './fab.service';
 
 @Component({
   selector: 'app-root',
@@ -10,4 +11,5 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'benjaminfester';
+  readonly fab = inject(FabService).action;
 }

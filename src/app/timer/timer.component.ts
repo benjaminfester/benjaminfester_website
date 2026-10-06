@@ -1,4 +1,5 @@
-import { Component, OnDestroy, OnInit, computed, signal } from '@angular/core';
+import { Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
+import { FabService } from '../fab.service';
 
 type Status = 'idle' | 'running' | 'paused' | 'done';
 
@@ -69,6 +70,14 @@ export class TimerComponent implements OnInit, OnDestroy {
     const d = new Date(Date.now() + this.remainingMs());
     return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   });
+
+  constructor() {
+    inject(FabService).register(() =>
+      this.status() === 'running'
+        ? { icon: 'pause', label: 'Pause timer', run: () => this.pause() }
+        : { icon: 'play', label: 'Start timer', run: () => this.start() },
+    );
+  }
 
   private readonly onVisibility = () => {
     if (document.visibilityState === 'visible' && this.status() === 'running') {

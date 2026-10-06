@@ -1,4 +1,4 @@
-<main class="timer" [class.done]="status() === 'done'">
+<main class="timer stagger" [class.done]="status() === 'done'">
   <svg class="dial" viewBox="0 0 200 200" role="img" [attr.aria-label]="timeText() + ' left'">
     <circle class="face" cx="100" cy="100" r="96" />
 
@@ -28,12 +28,23 @@
 
   <section class="controls">
     @if (status() === 'idle' || status() === 'done') {
-      <label class="minutes">
-        <input type="number" min="1" max="60" step="1" inputmode="numeric"
-               [value]="minutes()" (change)="setMinutes($any($event.target).value)"
-               (keydown.enter)="setMinutes($any($event.target).value); start()" />
-        <span>min</span>
-      </label>
+      <div class="minutes">
+        <button type="button" class="btn step" (click)="setMinutes(minutes() - 1)"
+                [disabled]="minutes() <= 1" aria-label="One minute less">
+          <i class="fa-solid fa-minus" aria-hidden="true"></i>
+        </button>
+        <label>
+          <input class="input" type="number" min="1" max="60" step="1" inputmode="numeric"
+                 [value]="minutes()" (focus)="$any($event.target).select()"
+                 (change)="setMinutes($any($event.target).value)"
+                 (keydown.enter)="setMinutes($any($event.target).value); start()" />
+          <span>min</span>
+        </label>
+        <button type="button" class="btn step" (click)="setMinutes(minutes() + 1)"
+                [disabled]="minutes() >= 60" aria-label="One minute more">
+          <i class="fa-solid fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
       <div class="presets">
         @for (p of presets; track p) {
           <button type="button" class="chip" [class.active]="p === minutes()" (click)="setMinutes(p)">{{ p }}</button>

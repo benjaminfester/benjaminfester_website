@@ -1,16 +1,57 @@
 <main class="landing">
-  <img class="logo" src="benjaminfester.svg" alt="benjaminfester logo" />
-  <h1>Benjamin Fester</h1>
-  <p class="lead">
-    Software engineer, 34, educated at DTU – Technical University of Denmark.
-  </p>
-  <p>
-    At PPCD I build greenStruct, a tool that helps construction engineers
-    design concrete foundations – slabs, strip and pad foundations – with
-    less material. Less concrete means lower cost and a smaller climate
-    footprint, without compromising on safety.
-  </p>
-  <a class="github" href="https://github.com/benjaminfester/" target="_blank" rel="noopener" aria-label="GitHub">
-    <i class="fab fa-github"></i>
-  </a>
+  <div class="content stagger">
+    <header class="intro">
+      <div class="avatar">
+        <img src="b-logo.svg" alt="Benjamin Fester logo" />
+      </div>
+
+      <div class="name">
+        <h1>Benjamin Fester</h1>
+        <p class="role">Software Engineer</p>
+      </div>
+
+      <ul class="tags">
+        <li><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> DTU alumnus</li>
+      </ul>
+    </header>
+
+    <section class="card">
+      <h2>Current position</h2>
+      <p class="headline">
+        At <a href="https://ppcd.dk" target="_blank" rel="noopener">PPCD</a> I build
+        <a class="highlight" href="https://greenstruct.dk" target="_blank" rel="noopener">greenStruct</a>.
+      </p>
+      <p>
+        A tool that helps construction engineers design concrete foundations –
+        slabs, strip and pad foundations – with as little material as possible.
+      </p>
+      <div class="callout">
+        <i class="fa-solid fa-leaf" aria-hidden="true"></i>
+        <p>
+          Less concrete means lower cost and a smaller climate footprint –
+          without compromising on safety.
+        </p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Key skills</h2>
+      <ul class="skills">
+        @for (skill of skills; track skill) {
+          <li>{{ skill }}</li>
+        }
+      </ul>
+    </section>
+
+    <nav class="actions">
+      <a class="btn primary" href="https://github.com/benjaminfester/" target="_blank" rel="noopener">
+        <i class="fab fa-github" aria-hidden="true"></i>
+        <span>See my projects on GitHub</span>
+      </a>
+      <a class="btn" href="https://www.linkedin.com/in/benjamin-fester-henningsen-531543150/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin" aria-hidden="true"></i>
+        <span>Connect on LinkedIn</span>
+      </a>
+    </nav>
+  </div>
 </main>

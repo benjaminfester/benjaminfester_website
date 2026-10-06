@@ -6,4 +6,13 @@ import { Component } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {}
+export class HomeComponent {
+  readonly skills = [
+    'Software architecture',
+    'Full-stack development',
+    'Optimization & numerical methods',
+    'Cloud & CI/CD',
+    'MySQL',
+    'Product development',
+  ];
+}

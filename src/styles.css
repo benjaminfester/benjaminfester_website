@@ -3,6 +3,31 @@
 :root {
   --main-x-padding: 5rem;
   --nav-height: 3.5rem;
+  --bottom-nav-height: 0px;
+
+  /* Sage palette: 60% bg, 30% primary, support secondary, 10% accent */
+  --color-bg: #fbfbf9;
+  --color-primary: #7a8974;
+  --color-secondary: #d9d2c5;
+  --color-accent: #3a4f3f;
+
+  /* Derived roles */
+  --color-text: var(--color-accent); /* primary is too light for body text (3.6:1) */
+  --color-accent-tint: rgb(58 79 63 / 0.08);
+  --color-on-accent: #fff;
+  --color-muted: var(--color-primary);
+  --color-surface: #fff;
+  --color-border: var(--color-secondary);
+  --color-divider: var(--color-secondary);
+  --color-shadow: rgb(58 79 63 / 0.15);
+}
+
+/* On phones the nav moves to the bottom, so pages pad the bottom instead of the top */
+@media (max-width: 640px) {
+  :root {
+    --nav-height: 0px;
+    --bottom-nav-height: calc(4.25rem + env(safe-area-inset-bottom));
+  }
 }
 
 @font-face {
@@ -25,12 +50,121 @@ body {
   margin: 0;
   min-height: 100vh;
   font-family: "ApercuLight", Arial, sans-serif;
-  background: linear-gradient(#232847 0%, #2b5a6c 100%);
-  color: #fff;
+  background: var(--color-bg);
+  color: var(--color-text);
   overflow-x: hidden;
 }
 
 h1 {
   font-family: "ApercuBold", Arial, sans-serif;
-  color: #fff;
+  color: var(--color-primary);
+}
+
+/* Shared form controls: text fields and buttons (primary, secondary, ghost) */
+
+.input {
+  box-sizing: border-box;
+  height: 3rem;
+  padding: 0 1rem;
+  font: 1rem "ApercuLight", Arial, sans-serif;
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid color-mix(in srgb, var(--color-secondary) 50%, transparent);
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+  transition: border-color 200ms, box-shadow 200ms;
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-primary) 10%, transparent);
+}
+
+.btn {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 3rem;
+  padding: 0 1.5rem;
+  font: 1rem "ApercuBold", Arial, sans-serif;
+  color: var(--color-accent);
+  background: var(--color-surface);
+  border: 1px solid var(--color-secondary);
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: background 150ms, color 150ms, box-shadow 150ms, transform 150ms;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover {
+  background: color-mix(in srgb, var(--color-secondary) 10%, var(--color-surface));
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-secondary) 50%, transparent);
+}
+
+.btn.primary {
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.btn.primary:hover {
+  background: color-mix(in srgb, var(--color-accent) 90%, transparent);
+}
+
+.btn.primary:focus-visible {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 20%, transparent);
+}
+
+.btn.ghost {
+  font-size: 0.875rem;
+  color: var(--color-primary);
+  background: transparent;
+  border-color: transparent;
+}
+
+.btn.ghost:hover {
+  color: var(--color-accent);
+  background: color-mix(in srgb, var(--color-secondary) 10%, transparent);
+}
+
+/* Entrance animation: put .stagger on a container and its children fade in and
+   slide up one after another */
+
+.stagger > * {
+  animation: fade-in-up 600ms ease-out both;
+}
+
+.stagger > :nth-child(2) { animation-delay: 100ms; }
+.stagger > :nth-child(3) { animation-delay: 200ms; }
+.stagger > :nth-child(4) { animation-delay: 300ms; }
+.stagger > :nth-child(5) { animation-delay: 400ms; }
+.stagger > :nth-child(n + 6) { animation-delay: 500ms; }
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger > * {
+    animation: none;
+  }
 }

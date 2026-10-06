@@ -2,7 +2,7 @@
   max-width: 36rem;
   margin: 0 auto;
   box-sizing: border-box;
-  padding: calc(var(--nav-height) + 2rem) 1rem 2rem;
+  padding: calc(var(--nav-height) + 2rem) 1rem calc(var(--bottom-nav-height) + 2rem);
 }
 
 h1 { margin: 0 0 1.5rem; font-size: 2.5rem; }
@@ -15,34 +15,7 @@ h2 {
 
 .add { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; }
 
-.add input {
-  flex: 1;
-  min-width: 0;
-  padding: 0.75rem 1rem;
-  font: 1.1rem "ApercuLight", Arial, sans-serif;
-  color: #fff;
-  background: rgb(255 255 255 / 0.1);
-  border: 2px solid rgb(255 255 255 / 0.35);
-  border-radius: 0.75rem;
-}
-
-.add input::placeholder { color: rgb(255 255 255 / 0.5); }
-.add input:focus { outline: none; border-color: #fff; }
-
-.btn {
-  font: 1rem "ApercuBold", Arial, sans-serif;
-  color: #fff;
-  cursor: pointer;
-  padding: 0.75rem 1.25rem;
-  border: 2px solid rgb(255 255 255 / 0.35);
-  border-radius: 0.75rem;
-  background: transparent;
-}
-
-.btn.primary { background: #e2231a; border-color: #e2231a; }
-.btn.primary:hover { background: #c81d15; }
-.btn.ghost { border-color: transparent; opacity: 0.7; padding: 0.25rem 0.5rem; }
-.btn.ghost:hover { opacity: 1; }
+.add .input { flex: 1; min-width: 0; }
 
 .list { list-style: none; margin: 0 0 1.5rem; padding: 0; }
 
@@ -51,7 +24,7 @@ h2 {
   align-items: center;
   gap: 0.5rem;
   padding: 0.6rem 0;
-  border-bottom: 1px solid rgb(255 255 255 / 0.15);
+  border-bottom: 1px solid var(--color-divider);
 }
 
 .list label {
@@ -68,7 +41,7 @@ h2 {
   width: 1.25rem;
   height: 1.25rem;
   flex-shrink: 0;
-  accent-color: #e2231a;
+  accent-color: var(--color-accent);
   cursor: pointer;
 }
 
@@ -79,11 +52,11 @@ h2 {
 .remove {
   font-size: 1.5rem;
   line-height: 1;
-  color: #fff;
+  color: var(--color-muted);
   background: none;
   border: none;
   cursor: pointer;
-  opacity: 0.4;
+  opacity: 0.6;
   padding: 0 0.25rem;
 }
 
@@ -96,6 +69,8 @@ h2 {
   margin-bottom: 0.25rem;
 }
 
+.bought-header .btn { height: 2.25rem; padding: 0 0.75rem; }
+
 .suggestions {
   display: flex;
   flex-wrap: wrap;
@@ -106,14 +81,14 @@ h2 {
 .chip {
   display: inline-flex;
   align-items: center;
-  border: 1px solid rgb(255 255 255 / 0.3);
+  border: 1px solid var(--color-border);
   border-radius: 999px;
   overflow: hidden;
 }
 
 .chip button {
   font: 0.95rem "ApercuLight", Arial, sans-serif;
-  color: #fff;
+  color: var(--color-text);
   background: none;
   border: none;
   cursor: pointer;
@@ -121,7 +96,7 @@ h2 {
 
 .chip-add { padding: 0.35rem 0.25rem 0.35rem 0.8rem; }
 .chip-forget { padding: 0.35rem 0.7rem 0.35rem 0.35rem; opacity: 0.4; }
-.chip:hover { background: rgb(255 255 255 / 0.1); border-color: #fff; }
+.chip:hover { background: var(--color-accent-tint); border-color: var(--color-accent); }
 .chip-forget:hover { opacity: 1; }
 
 .list li { min-height: 2.25rem; }

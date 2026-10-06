@@ -1,7 +1,25 @@
 <nav class="nav">
-  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
-  <a routerLink="/timer" routerLinkActive="active">Timer</a>
-  <a routerLink="/todo" routerLinkActive="active">To do</a>
-  <a routerLink="/groceries" routerLinkActive="active">Groceries</a>
+  <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+    <i class="fa-solid fa-house" aria-hidden="true"></i><span>Home</span>
+  </a>
+  <a routerLink="/timer" routerLinkActive="active">
+    <i class="fa-solid fa-stopwatch" aria-hidden="true"></i><span>Timer</span>
+  </a>
+
+  <!-- Mobile only: what it does depends on the page (see FabService) -->
+  <div class="fab-slot">
+    @if (fab(); as action) {
+      <button type="button" class="fab" (click)="action.run()" [attr.aria-label]="action.label">
+        <i [class]="'fa-solid fa-' + action.icon" aria-hidden="true"></i>
+      </button>
+    }
+  </div>
+
+  <a routerLink="/todo" routerLinkActive="active">
+    <i class="fa-solid fa-list-check" aria-hidden="true"></i><span>To do</span>
+  </a>
+  <a routerLink="/groceries" routerLinkActive="active">
+    <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span>Groceries</span>
+  </a>
 </nav>
 <router-outlet />

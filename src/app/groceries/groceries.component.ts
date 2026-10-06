@@ -1,4 +1,5 @@
-import { Component, computed, effect, signal } from '@angular/core';
+import { Component, ElementRef, computed, effect, inject, signal, viewChild } from '@angular/core';
+import { FabService } from '../fab.service';
 
 interface Grocery {
   id: number;
@@ -19,6 +20,7 @@ const MAX_RECENT = 20;
 export class GroceriesComponent {
   items = signal<Grocery[]>(this.load(ITEMS_KEY));
   recent = signal<string[]>(this.load(RECENT_KEY));
+  private readonly newItem = viewChild.required<ElementRef<HTMLInputElement>>('newItem');
 
   readonly toBuy = computed(() => this.items().filter((g) => !g.bought));
   readonly bought = computed(() => this.items().filter((g) => g.bought));
@@ -30,6 +32,11 @@ export class GroceriesComponent {
   });
 
   constructor() {
+    inject(FabService).register(() => ({
+      icon: 'plus',
+      label: 'Add grocery item',
+      run: () => this.newItem().nativeElement.focus(),
+    }));
     effect(() => this.save(ITEMS_KEY, this.items()));
     effect(() => this.save(RECENT_KEY, this.recent()));
   }

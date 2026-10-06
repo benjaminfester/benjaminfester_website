@@ -35,6 +35,27 @@
   display: none;
 }
 
+/* Home is the logo instead of text ("Home" label only shows in the mobile bar) */
+.nav a.home {
+  display: flex;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.nav a.home span {
+  display: none;
+}
+
+.logo {
+  height: 1.75rem;
+  width: auto;
+  transition: transform 150ms ease;
+}
+
+.nav a.home:hover .logo {
+  transform: scale(1.08);
+}
+
 /* Mobile: bottom bar with a raised, page-specific action button in the middle */
 @media (max-width: 640px) {
   .nav {
@@ -69,6 +90,18 @@
   .nav a i {
     display: block;
     font-size: 1.2rem;
+  }
+
+  .nav a.home {
+    padding-bottom: 0.5rem;
+  }
+
+  .nav a.home span {
+    display: inline;
+  }
+
+  .logo {
+    height: 1.2rem;
   }
 
   .nav a.active {

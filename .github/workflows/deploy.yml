@@ -1,0 +1,46 @@
+# Builds the site and uploads it to benjaminfester.dk on every push to master.
+#
+# Needs two repository secrets (Settings → Secrets and variables → Actions):
+#   DEPLOY_SSH_KEY      private key for the "deploy" user on the server
+#   DEPLOY_KNOWN_HOSTS  output of: ssh-keyscan -t ed25519 benjaminfester.dk
+
+name: Deploy
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - run: npx ng test --watch=false --browsers=ChromeHeadless
+
+      - run: npm run build
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/id_ed25519
+          echo "${{ secrets.DEPLOY_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: Upload to server
+        run: |
+          rsync -az --delete-after \
+            dist/benjaminfester_website/browser/ \
+            deploy@benjaminfester.dk:/var/www/benjaminfester.dk/html/

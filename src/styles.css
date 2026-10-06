@@ -7,16 +7,16 @@
 @font-face {
   font-family: "ApercuLight";
   src:
-    url("/assets/fonts/ApercuLight.ttf") format("truetype"),
-    url("/assets/fonts/ApercuLight.otf") format("opentype");
+    url("./assets/fonts/ApercuLight.ttf") format("truetype"),
+    url("./assets/fonts/ApercuLight.otf") format("opentype");
   font-weight: normal;
 }
 
 @font-face {
   font-family: "ApercuBold";
   src:
-    url("/assets/fonts/ApercuBold.ttf") format("truetype"),
-    url("/assets/fonts/ApercuBold.otf") format("opentype");
+    url("./assets/fonts/ApercuBold.ttf") format("truetype"),
+    url("./assets/fonts/ApercuBold.otf") format("opentype");
 }
 
 html,

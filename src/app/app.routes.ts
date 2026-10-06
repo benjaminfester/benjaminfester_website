@@ -9,19 +9,19 @@ export const routes: Routes = [
   },
   {
     path: 'timer',
-    title: 'Timer',
+    title: 'timer',
     loadComponent: () =>
       import('./timer/timer.component').then((m) => m.TimerComponent),
   },
   {
     path: 'todo',
-    title: 'To do',
+    title: 'todo',
     loadComponent: () =>
       import('./todo/todo.component').then((m) => m.TodoComponent),
   },
   {
     path: 'groceries',
-    title: 'Groceries',
+    title: 'groceries',
     loadComponent: () =>
       import('./groceries/groceries.component').then((m) => m.GroceriesComponent),
   },

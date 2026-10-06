@@ -1,5 +1,5 @@
 <main class="timer stagger" [class.done]="status() === 'done'">
-  <svg class="dial" viewBox="0 0 200 200" role="img" [attr.aria-label]="timeText() + ' left'">
+  <svg class="dial" viewBox="0 0 200 200" role="img" [attr.aria-label]="t().timer.timeLeft(timeText())">
     <circle class="face" cx="100" cy="100" r="96" />
 
     <path class="disk" [attr.d]="diskPath()" />
@@ -17,20 +17,20 @@
 
   <div class="time" aria-live="off">
     @if (status() === 'done') {
-      <span class="finished">Time's up!</span>
+      <span class="finished">{{ t().timer.timesUp }}</span>
     } @else {
       {{ timeText() }}
     }
   </div>
   <p class="ends">
-    @if (endsAtText()) { Ends at {{ endsAtText() }} } @else { &nbsp; }
+    @if (endsAtText()) { {{ t().timer.endsAt(endsAtText()) }} } @else { &nbsp; }
   </p>
 
   <section class="controls">
     @if (status() === 'idle' || status() === 'done') {
       <div class="minutes">
         <button type="button" class="btn step" (click)="setMinutes(minutes() - 1)"
-                [disabled]="minutes() <= 1" aria-label="One minute less">
+                [disabled]="minutes() <= 1" [attr.aria-label]="t().timer.minus">
           <i class="fa-solid fa-minus" aria-hidden="true"></i>
         </button>
         <label>
@@ -41,7 +41,7 @@
           <span>min</span>
         </label>
         <button type="button" class="btn step" (click)="setMinutes(minutes() + 1)"
-                [disabled]="minutes() >= 60" aria-label="One minute more">
+                [disabled]="minutes() >= 60" [attr.aria-label]="t().timer.plus">
           <i class="fa-solid fa-plus" aria-hidden="true"></i>
         </button>
       </div>
@@ -55,15 +55,15 @@
     <div class="actions">
       @switch (status()) {
         @case ('running') {
-          <button type="button" class="btn" (click)="pause()">Pause</button>
-          <button type="button" class="btn ghost" (click)="reset()">Reset</button>
+          <button type="button" class="btn" (click)="pause()">{{ t().timer.pause }}</button>
+          <button type="button" class="btn ghost" (click)="reset()">{{ t().timer.reset }}</button>
         }
         @case ('paused') {
-          <button type="button" class="btn primary" (click)="start()">Resume</button>
-          <button type="button" class="btn ghost" (click)="reset()">Reset</button>
+          <button type="button" class="btn primary" (click)="start()">{{ t().timer.resume }}</button>
+          <button type="button" class="btn ghost" (click)="reset()">{{ t().timer.reset }}</button>
         }
         @default {
-          <button type="button" class="btn primary" (click)="start()">Start</button>
+          <button type="button" class="btn primary" (click)="start()">{{ t().timer.start }}</button>
         }
       }
     </div>

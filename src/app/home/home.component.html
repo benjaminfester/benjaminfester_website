@@ -1,65 +1,58 @@
 <main class="landing">
   <div class="content stagger">
     <header class="intro">
-      <img class="photo" src="benjamin.webp" alt="Portrait of Benjamin Fester" width="600" height="400" />
+      <img class="photo" src="benjamin.webp" [alt]="t().home.photoAlt" width="600" height="400" />
 
       <div class="name">
         <h1>Benjamin Fester</h1>
-        <p class="role">Software Engineer</p>
+        <p class="role">{{ t().home.role }}</p>
       </div>
 
       <ul class="tags">
-        <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Copenhagen, Denmark</li>
-        <li><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> DTU alumnus</li>
+        <li><i class="fa-solid fa-location-dot" aria-hidden="true"></i> {{ t().home.location }}</li>
+        <li><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> {{ t().home.education }}</li>
       </ul>
     </header>
 
     <section class="card">
-      <h2>Current position</h2>
+      <h2>{{ t().home.position }}</h2>
       <p class="headline">
-        At <a href="https://ppcd.dk" target="_blank" rel="noopener">PPCD</a> I build
+        {{ t().home.atCompany }} <a href="https://ppcd.dk" target="_blank" rel="noopener">PPCD</a> {{ t().home.iBuild }}
         <a class="highlight" href="https://greenstruct.dk" target="_blank" rel="noopener">greenStruct</a>.
       </p>
-      <p>
-        A tool that helps construction engineers design concrete foundations –
-        slabs, strip and pad foundations – with as little material as possible.
-      </p>
+      <p>{{ t().home.product }}</p>
       <div class="callout">
         <i class="fa-solid fa-leaf" aria-hidden="true"></i>
-        <p>
-          Less concrete means lower cost and a smaller climate footprint –
-          without compromising on safety.
-        </p>
+        <p>{{ t().home.impact }}</p>
       </div>
     </section>
 
     <section class="card">
-      <h2>Key skills</h2>
+      <h2>{{ t().home.skillsTitle }}</h2>
       <ul class="skills">
-        @for (skill of skills; track skill) {
+        @for (skill of t().home.skills; track skill) {
           <li>{{ skill }}</li>
         }
       </ul>
     </section>
 
     <section class="hobbies">
-      <h2>Outside of work</h2>
+      <h2>{{ t().home.hobbiesTitle }}</h2>
       <ul class="tags">
-        <li>Muay Thai</li>
-        <li>Running</li>
-        <li>Skateboarding</li>
-        <li>World of Warcraft</li>
+        @for (hobby of t().home.hobbies; track hobby) {
+          <li>{{ hobby }}</li>
+        }
       </ul>
     </section>
 
     <nav class="actions">
       <a class="btn primary" href="https://github.com/benjaminfester/" target="_blank" rel="noopener">
         <i class="fab fa-github" aria-hidden="true"></i>
-        <span>See my projects on GitHub</span>
+        <span>{{ t().home.github }}</span>
       </a>
       <a class="btn" href="https://www.linkedin.com/in/benjamin-fester-henningsen-531543150/" target="_blank" rel="noopener">
         <i class="fab fa-linkedin" aria-hidden="true"></i>
-        <span>Connect on LinkedIn</span>
+        <span>{{ t().home.linkedin }}</span>
       </a>
       <a class="btn ghost" href="mailto:benfesterh@gmail.com">
         <i class="fa-solid fa-envelope" aria-hidden="true"></i>

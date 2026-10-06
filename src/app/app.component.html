@@ -1,9 +1,9 @@
 <nav class="nav">
-  <a class="home" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" aria-label="Home">
-    <img class="logo" src="b-logo.svg" alt="" /><span>Home</span>
+  <a class="home" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [attr.aria-label]="t().nav.home">
+    <img class="logo" src="b-logo.svg" alt="" /><span>{{ t().nav.home }}</span>
   </a>
   <a routerLink="/timer" routerLinkActive="active">
-    <i class="fa-solid fa-stopwatch" aria-hidden="true"></i><span>Timer</span>
+    <i class="fa-solid fa-stopwatch" aria-hidden="true"></i><span>{{ t().nav.timer }}</span>
   </a>
 
   <!-- Mobile only: what it does depends on the page (see FabService) -->
@@ -16,10 +16,19 @@
   </div>
 
   <a routerLink="/todo" routerLinkActive="active">
-    <i class="fa-solid fa-list-check" aria-hidden="true"></i><span>To do</span>
+    <i class="fa-solid fa-list-check" aria-hidden="true"></i><span>{{ t().nav.todo }}</span>
   </a>
   <a routerLink="/groceries" routerLinkActive="active">
-    <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span>Groceries</span>
+    <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><span>{{ t().nav.groceries }}</span>
   </a>
 </nav>
+
+<!-- Language names are written in their own language, so each is readable to the person who needs it -->
+<div class="lang" role="group" [attr.aria-label]="t().language">
+  <button type="button" lang="da" [class.active]="lang() === 'da'" [attr.aria-pressed]="lang() === 'da'"
+          (click)="setLang('da')" aria-label="Dansk">DA</button>
+  <button type="button" lang="en" [class.active]="lang() === 'en'" [attr.aria-pressed]="lang() === 'en'"
+          (click)="setLang('en')" aria-label="English">EN</button>
+</div>
+
 <router-outlet />

@@ -1,5 +1,6 @@
 import { Component, ElementRef, computed, effect, inject, signal, viewChild } from '@angular/core';
 import { FabService } from '../fab.service';
+import { LanguageService } from '../language.service';
 
 interface Todo {
   id: number;
@@ -16,6 +17,7 @@ const STORAGE_KEY = 'todo-items';
   styleUrls: ['./todo.component.css'],
 })
 export class TodoComponent {
+  readonly t = inject(LanguageService).t;
   items = signal<Todo[]>(this.load());
   private readonly newItem = viewChild.required<ElementRef<HTMLInputElement>>('newItem');
 
@@ -25,7 +27,7 @@ export class TodoComponent {
   constructor() {
     inject(FabService).register(() => ({
       icon: 'plus',
-      label: 'Add to-do',
+      label: this.t().todo.fab,
       run: () => this.newItem().nativeElement.focus(),
     }));
     effect(() => {

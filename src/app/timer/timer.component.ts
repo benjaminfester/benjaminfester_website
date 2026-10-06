@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
 import { FabService } from '../fab.service';
+import { LanguageService } from '../language.service';
 
 type Status = 'idle' | 'running' | 'paused' | 'done';
 
@@ -23,6 +24,9 @@ const DISK_R = 78;
   styleUrls: ['./timer.component.css'],
 })
 export class TimerComponent implements OnInit, OnDestroy {
+  private readonly i18n = inject(LanguageService);
+  readonly t = this.i18n.t;
+
   readonly presets = [5, 10, 15, 20, 30, 45];
 
   readonly ticks = Array.from({ length: 60 }, (_, i) => {
@@ -68,14 +72,14 @@ export class TimerComponent implements OnInit, OnDestroy {
   readonly endsAtText = computed(() => {
     if (this.status() !== 'running') return '';
     const d = new Date(Date.now() + this.remainingMs());
-    return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    return d.toLocaleTimeString(this.i18n.locale(), { hour: '2-digit', minute: '2-digit' });
   });
 
   constructor() {
     inject(FabService).register(() =>
       this.status() === 'running'
-        ? { icon: 'pause', label: 'Pause timer', run: () => this.pause() }
-        : { icon: 'play', label: 'Start timer', run: () => this.start() },
+        ? { icon: 'pause', label: this.t().timer.fabPause, run: () => this.pause() }
+        : { icon: 'play', label: this.t().timer.fabStart, run: () => this.start() },
     );
   }
 

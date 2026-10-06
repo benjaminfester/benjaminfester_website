@@ -1,17 +1,17 @@
 <main class="groceries stagger">
-  <h1>Groceries</h1>
+  <h1>{{ t().groceries.title }}</h1>
 
   <form class="add" (submit)="$event.preventDefault(); add(newItem)">
-    <input #newItem class="input" type="text" placeholder="Milk, eggs, bread…" aria-label="New grocery item" autocomplete="off" enterkeyhint="done" />
-    <button type="submit" class="btn primary">Add</button>
+    <input #newItem class="input" type="text" [placeholder]="t().groceries.placeholder" [attr.aria-label]="t().groceries.newItem" autocomplete="off" enterkeyhint="done" />
+    <button type="submit" class="btn primary">{{ t().groceries.add }}</button>
   </form>
 
   @if (suggestions().length) {
-    <div class="suggestions" aria-label="Recently added">
+    <div class="suggestions" [attr.aria-label]="t().groceries.recent">
       @for (name of suggestions(); track name) {
         <span class="chip">
           <button type="button" class="chip-add" (click)="addName(name)">+ {{ name }}</button>
-          <button type="button" class="chip-forget" (click)="forget(name)" [attr.aria-label]="'Forget ' + name">×</button>
+          <button type="button" class="chip-forget" (click)="forget(name)" [attr.aria-label]="t().groceries.forget(name)">×</button>
         </span>
       }
     </div>
@@ -24,17 +24,17 @@
           <input type="checkbox" [checked]="g.bought" (change)="toggle(g.id)" />
           <span>{{ g.name }}</span>
         </label>
-        <button type="button" class="remove" (click)="remove(g.id)" [attr.aria-label]="'Remove ' + g.name">×</button>
+        <button type="button" class="remove" (click)="remove(g.id)" [attr.aria-label]="t().groceries.remove(g.name)">×</button>
       </li>
     } @empty {
-      <li class="empty">Nothing to buy 🛒</li>
+      <li class="empty">{{ t().groceries.empty }}</li>
     }
   </ul>
 
   @if (bought().length) {
     <div class="bought-header">
-      <h2>In the basket ({{ bought().length }})</h2>
-      <button type="button" class="btn ghost" (click)="clearBought()">Clear</button>
+      <h2>{{ t().groceries.bought(bought().length) }}</h2>
+      <button type="button" class="btn ghost" (click)="clearBought()">{{ t().groceries.clear }}</button>
     </div>
     <ul class="list bought">
       @for (g of bought(); track g.id) {
@@ -43,7 +43,7 @@
             <input type="checkbox" [checked]="g.bought" (change)="toggle(g.id)" />
             <span>{{ g.name }}</span>
           </label>
-          <button type="button" class="remove" (click)="remove(g.id)" [attr.aria-label]="'Remove ' + g.name">×</button>
+          <button type="button" class="remove" (click)="remove(g.id)" [attr.aria-label]="t().groceries.remove(g.name)">×</button>
         </li>
       }
     </ul>

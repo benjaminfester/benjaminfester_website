@@ -1,38 +1,38 @@
 <main class="todo stagger">
-  <h1>To do</h1>
+  <h1>{{ t().todo.title }}</h1>
 
   <form class="add" (submit)="$event.preventDefault(); add(newItem)">
-    <input #newItem class="input" type="text" placeholder="Add something…" aria-label="New to-do" autocomplete="off" />
-    <button type="submit" class="btn primary">Add</button>
+    <input #newItem class="input" type="text" [placeholder]="t().todo.placeholder" [attr.aria-label]="t().todo.newItem" autocomplete="off" />
+    <button type="submit" class="btn primary">{{ t().todo.add }}</button>
   </form>
 
   <ul class="list">
-    @for (t of open(); track t.id) {
+    @for (item of open(); track item.id) {
       <li>
         <label>
-          <input type="checkbox" [checked]="t.done" (change)="toggle(t.id)" />
-          <span>{{ t.text }}</span>
+          <input type="checkbox" [checked]="item.done" (change)="toggle(item.id)" />
+          <span>{{ item.text }}</span>
         </label>
-        <button type="button" class="remove" (click)="remove(t.id)" aria-label="Delete">×</button>
+        <button type="button" class="remove" (click)="remove(item.id)" [attr.aria-label]="t().todo.remove">×</button>
       </li>
     } @empty {
-      <li class="empty">Nothing to do 🎉</li>
+      <li class="empty">{{ t().todo.empty }}</li>
     }
   </ul>
 
   @if (done().length) {
     <div class="done-header">
-      <h2>Done ({{ done().length }})</h2>
-      <button type="button" class="btn ghost" (click)="clearDone()">Clear</button>
+      <h2>{{ t().todo.done(done().length) }}</h2>
+      <button type="button" class="btn ghost" (click)="clearDone()">{{ t().todo.clear }}</button>
     </div>
     <ul class="list done">
-      @for (t of done(); track t.id) {
+      @for (item of done(); track item.id) {
         <li>
           <label>
-            <input type="checkbox" [checked]="t.done" (change)="toggle(t.id)" />
-            <span>{{ t.text }}</span>
+            <input type="checkbox" [checked]="item.done" (change)="toggle(item.id)" />
+            <span>{{ item.text }}</span>
           </label>
-          <button type="button" class="remove" (click)="remove(t.id)" aria-label="Delete">×</button>
+          <button type="button" class="remove" (click)="remove(item.id)" [attr.aria-label]="t().todo.remove">×</button>
         </li>
       }
     </ul>

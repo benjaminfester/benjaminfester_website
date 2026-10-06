@@ -20,6 +20,24 @@
   --color-border: var(--color-secondary);
   --color-divider: var(--color-secondary);
   --color-shadow: rgb(58 79 63 / 0.15);
+
+  color-scheme: light dark;
+}
+
+/* Dark mode follows the device setting. Same roles, so accent becomes the light
+   text colour and primary buttons turn light-on-dark automatically. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #161b17;
+    --color-primary: #9aab93;
+    --color-secondary: #3d463e;
+    --color-accent: #dbe5d6;
+
+    --color-accent-tint: rgb(219 229 214 / 0.08);
+    --color-on-accent: #161b17;
+    --color-surface: #1e2420;
+    --color-shadow: rgb(0 0 0 / 0.4);
+  }
 }
 
 /* On phones the nav moves to the bottom, so pages pad the bottom instead of the top */

@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LanguageService } from '../language.service';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  readonly skills = [
-    'Software architecture',
-    'Full-stack development',
-    'Optimization & numerical methods',
-    'Cloud & CI/CD',
-    'MySQL',
-    'Product development',
-  ];
+  readonly t = inject(LanguageService).t;
 }

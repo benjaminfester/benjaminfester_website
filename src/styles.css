@@ -2,6 +2,7 @@
 
 :root {
   --main-x-padding: 5rem;
+  --nav-height: 3.5rem;
 }
 
 @font-face {

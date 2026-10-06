@@ -1,0 +1,32 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  height: var(--nav-height);
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 1rem;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  opacity: 0.6;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 0.15rem;
+}
+
+.nav a:hover {
+  opacity: 1;
+}
+
+.nav a.active {
+  font-family: "ApercuBold", Arial, sans-serif;
+  opacity: 1;
+  border-bottom-color: #fff;
+}

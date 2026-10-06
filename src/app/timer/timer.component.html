@@ -1,0 +1,60 @@
+<main class="timer" [class.done]="status() === 'done'">
+  <svg class="dial" viewBox="0 0 200 200" role="img" [attr.aria-label]="timeText() + ' left'">
+    <circle class="face" cx="100" cy="100" r="96" />
+
+    <path class="disk" [attr.d]="diskPath()" />
+
+    @for (t of ticks; track $index) {
+      <line [attr.x1]="t.x1" [attr.y1]="t.y1" [attr.x2]="t.x2" [attr.y2]="t.y2"
+            [class.major]="t.major" class="tick" />
+    }
+    @for (l of labels; track l.text) {
+      <text [attr.x]="l.x" [attr.y]="l.y" class="label">{{ l.text }}</text>
+    }
+
+    <circle class="knob" cx="100" cy="100" r="9" />
+  </svg>
+
+  <div class="time" aria-live="off">
+    @if (status() === 'done') {
+      <span class="finished">Time's up!</span>
+    } @else {
+      {{ timeText() }}
+    }
+  </div>
+  <p class="ends">
+    @if (endsAtText()) { Ends at {{ endsAtText() }} } @else { &nbsp; }
+  </p>
+
+  <section class="controls">
+    @if (status() === 'idle' || status() === 'done') {
+      <label class="minutes">
+        <input type="number" min="1" max="60" step="1" inputmode="numeric"
+               [value]="minutes()" (change)="setMinutes($any($event.target).value)"
+               (keydown.enter)="setMinutes($any($event.target).value); start()" />
+        <span>min</span>
+      </label>
+      <div class="presets">
+        @for (p of presets; track p) {
+          <button type="button" class="chip" [class.active]="p === minutes()" (click)="setMinutes(p)">{{ p }}</button>
+        }
+      </div>
+    }
+
+    <div class="actions">
+      @switch (status()) {
+        @case ('running') {
+          <button type="button" class="btn" (click)="pause()">Pause</button>
+          <button type="button" class="btn ghost" (click)="reset()">Reset</button>
+        }
+        @case ('paused') {
+          <button type="button" class="btn primary" (click)="start()">Resume</button>
+          <button type="button" class="btn ghost" (click)="reset()">Reset</button>
+        }
+        @default {
+          <button type="button" class="btn primary" (click)="start()">Start</button>
+        }
+      }
+    </div>
+  </section>
+</main>

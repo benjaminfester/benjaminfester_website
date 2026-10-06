@@ -1,0 +1,51 @@
+<main class="groceries">
+  <h1>Groceries</h1>
+
+  <form class="add" (submit)="$event.preventDefault(); add(newItem)">
+    <input #newItem type="text" placeholder="Milk, eggs, bread…" aria-label="New grocery item" autocomplete="off" enterkeyhint="done" />
+    <button type="submit" class="btn primary">Add</button>
+  </form>
+
+  @if (suggestions().length) {
+    <div class="suggestions" aria-label="Recently added">
+      @for (name of suggestions(); track name) {
+        <span class="chip">
+          <button type="button" class="chip-add" (click)="addName(name)">+ {{ name }}</button>
+          <button type="button" class="chip-forget" (click)="forget(name)" [attr.aria-label]="'Forget ' + name">×</button>
+        </span>
+      }
+    </div>
+  }
+
+  <ul class="list">
+    @for (g of toBuy(); track g.id) {
+      <li>
+        <label>
+          <input type="checkbox" [checked]="g.bought" (change)="toggle(g.id)" />
+          <span>{{ g.name }}</span>
+        </label>
+        <button type="button" class="remove" (click)="remove(g.id)" [attr.aria-label]="'Remove ' + g.name">×</button>
+      </li>
+    } @empty {
+      <li class="empty">Nothing to buy 🛒</li>
+    }
+  </ul>
+
+  @if (bought().length) {
+    <div class="bought-header">
+      <h2>In the basket ({{ bought().length }})</h2>
+      <button type="button" class="btn ghost" (click)="clearBought()">Clear</button>
+    </div>
+    <ul class="list bought">
+      @for (g of bought(); track g.id) {
+        <li>
+          <label>
+            <input type="checkbox" [checked]="g.bought" (change)="toggle(g.id)" />
+            <span>{{ g.name }}</span>
+          </label>
+          <button type="button" class="remove" (click)="remove(g.id)" [attr.aria-label]="'Remove ' + g.name">×</button>
+        </li>
+      }
+    </ul>
+  }
+</main>

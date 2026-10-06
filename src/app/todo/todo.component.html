@@ -1,0 +1,40 @@
+<main class="todo">
+  <h1>To do</h1>
+
+  <form class="add" (submit)="$event.preventDefault(); add(newItem)">
+    <input #newItem type="text" placeholder="Add something…" aria-label="New to-do" autocomplete="off" />
+    <button type="submit" class="btn primary">Add</button>
+  </form>
+
+  <ul class="list">
+    @for (t of open(); track t.id) {
+      <li>
+        <label>
+          <input type="checkbox" [checked]="t.done" (change)="toggle(t.id)" />
+          <span>{{ t.text }}</span>
+        </label>
+        <button type="button" class="remove" (click)="remove(t.id)" aria-label="Delete">×</button>
+      </li>
+    } @empty {
+      <li class="empty">Nothing to do 🎉</li>
+    }
+  </ul>
+
+  @if (done().length) {
+    <div class="done-header">
+      <h2>Done ({{ done().length }})</h2>
+      <button type="button" class="btn ghost" (click)="clearDone()">Clear</button>
+    </div>
+    <ul class="list done">
+      @for (t of done(); track t.id) {
+        <li>
+          <label>
+            <input type="checkbox" [checked]="t.done" (change)="toggle(t.id)" />
+            <span>{{ t.text }}</span>
+          </label>
+          <button type="button" class="remove" (click)="remove(t.id)" aria-label="Delete">×</button>
+        </li>
+      }
+    </ul>
+  }
+</main>

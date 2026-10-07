@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
+import { AuthService } from '../auth.service';
 import { FabService } from '../fab.service';
 import { LanguageService } from '../language.service';
 
@@ -11,7 +12,6 @@ interface SavedState {
   pausedRemainingMs: number;
 }
 
-const STORAGE_KEY = 'timer-state';
 const MAX_MINUTES = 60;
 const CX = 100;
 const CY = 100;
@@ -26,6 +26,8 @@ const DISK_R = 78;
 export class TimerComponent implements OnInit, OnDestroy {
   private readonly i18n = inject(LanguageService);
   readonly t = this.i18n.t;
+  /** Per user, so two people signed in on the same device each get their own timer. */
+  private readonly storageKey = `timer-state-${inject(AuthService).user()?.id}`;
 
   readonly presets = [5, 10, 15, 20, 30, 45];
 
@@ -174,7 +176,7 @@ export class TimerComponent implements OnInit, OnDestroy {
       pausedRemainingMs: this.remainingMs(),
     };
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+      localStorage.setItem(this.storageKey, JSON.stringify(state));
     } catch {}
   }
 
@@ -182,7 +184,7 @@ export class TimerComponent implements OnInit, OnDestroy {
   private restore(): void {
     let state: SavedState | null = null;
     try {
-      state = JSON.parse(localStorage.getItem(STORAGE_KEY) ?? 'null');
+      state = JSON.parse(localStorage.getItem(this.storageKey) ?? 'null');
     } catch {}
     if (!state) return;
 

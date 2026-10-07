@@ -23,12 +23,41 @@
   </a>
 </nav>
 
-<!-- Language names are written in their own language, so each is readable to the person who needs it -->
-<div class="lang" role="group" [attr.aria-label]="t().language">
-  <button type="button" lang="da" [class.active]="lang() === 'da'" [attr.aria-pressed]="lang() === 'da'"
-          (click)="setLang('da')" aria-label="Dansk">DA</button>
-  <button type="button" lang="en" [class.active]="lang() === 'en'" [attr.aria-pressed]="lang() === 'en'"
-          (click)="setLang('en')" aria-label="English">EN</button>
+<div class="corner">
+  <!-- Language names are written in their own language, so each is readable to the person who needs it -->
+  <div class="lang" role="group" [attr.aria-label]="t().language">
+    <button type="button" lang="da" [class.active]="lang() === 'da'" [attr.aria-pressed]="lang() === 'da'"
+            (click)="setLang('da')" aria-label="Dansk">DA</button>
+    <button type="button" lang="en" [class.active]="lang() === 'en'" [attr.aria-pressed]="lang() === 'en'"
+            (click)="setLang('en')" aria-label="English">EN</button>
+  </div>
+
+  @if (user(); as user) {
+    <div class="account">
+      <button type="button" class="avatar" (click)="toggleAccount($event)" [attr.aria-label]="t().auth.account"
+              [attr.aria-expanded]="accountOpen()" aria-controls="account-menu">
+        @if (avatarUrl(); as url) {
+          <img [src]="url" alt="" />
+        } @else {
+          <i class="fa-solid fa-user" aria-hidden="true"></i>
+        }
+      </button>
+      @if (accountOpen()) {
+        <div id="account-menu" class="menu" (click)="$event.stopPropagation()">
+          @if (user['name']) {
+            <p class="name">{{ user['name'] }}</p>
+          }
+          <p class="email">{{ user['email'] }}</p>
+          <button type="button" class="btn" (click)="signOut()">
+            <i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i>
+            <span>{{ t().auth.signOut }}</span>
+          </button>
+        </div>
+      }
+    </div>
+  } @else {
+    <a class="sign-in" routerLink="/login">{{ t().auth.signIn }}</a>
+  }
 </div>
 
 <router-outlet />

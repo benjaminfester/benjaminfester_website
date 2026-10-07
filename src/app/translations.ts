@@ -16,6 +16,7 @@ const en = {
     groceries: 'Groceries',
     privacy: 'Privacy policy',
     terms: 'Terms of service',
+    login: 'Sign in',
   },
   nav: {
     home: 'Home',
@@ -88,6 +89,21 @@ const en = {
     bought: (n: number) => `In the basket (${n})`,
     clear: 'Clear',
     fab: 'Add grocery item',
+  },
+  auth: {
+    title: 'Sign in',
+    intro: 'Sign in to use the timer, to-do list and grocery list. Your lists follow you to all your devices.',
+    google: 'Sign in with Google',
+    waiting: 'Waiting for Google…',
+    failed: 'Sign-in failed or was cancelled. Please try again.',
+    // "By signing in you accept the terms of service and the privacy policy." – the two names are links
+    acceptPrefix: 'By signing in you accept the',
+    termsLink: 'terms of service',
+    and: 'and the',
+    privacyLink: 'privacy policy',
+    signIn: 'Sign in',
+    account: 'Account',
+    signOut: 'Sign out',
   },
   legal: {
     updated: 'Last updated: 7 October 2026',
@@ -222,6 +238,7 @@ const da: Translations = {
     groceries: 'Indkøb',
     privacy: 'Privatlivspolitik',
     terms: 'Servicevilkår',
+    login: 'Log ind',
   },
   nav: {
     home: 'Hjem',
@@ -293,6 +310,20 @@ const da: Translations = {
     bought: (n: number) => `I kurven (${n})`,
     clear: 'Ryd',
     fab: 'Tilføj vare',
+  },
+  auth: {
+    title: 'Log ind',
+    intro: 'Log ind for at bruge timer, opgaver og indkøbsliste. Dine lister følger med på alle dine enheder.',
+    google: 'Log ind med Google',
+    waiting: 'Venter på Google…',
+    failed: 'Login mislykkedes eller blev annulleret. Prøv igen.',
+    acceptPrefix: 'Når du logger ind, accepterer du',
+    termsLink: 'servicevilkårene',
+    and: 'og',
+    privacyLink: 'privatlivspolitikken',
+    signIn: 'Log ind',
+    account: 'Konto',
+    signOut: 'Log ud',
   },
   legal: {
     updated: 'Sidst opdateret: 7. oktober 2026',

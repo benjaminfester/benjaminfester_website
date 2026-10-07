@@ -40,3 +40,8 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# PocketBase (binary + local database; pb_migrations is committed)
+/pocketbase/pocketbase.exe
+/pocketbase/pocketbase
+/pocketbase/pb_data

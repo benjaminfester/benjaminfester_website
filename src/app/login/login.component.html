@@ -1,0 +1,21 @@
+<main class="login">
+  <div class="card stagger">
+    <i class="fa-solid fa-lock icon" aria-hidden="true"></i>
+    <h1>{{ t().auth.title }}</h1>
+    <p>{{ t().auth.intro }}</p>
+
+    <button type="button" class="btn primary" (click)="login()" [disabled]="busy()">
+      <i class="fa-brands fa-google" aria-hidden="true"></i>
+      <span>{{ busy() ? t().auth.waiting : t().auth.google }}</span>
+    </button>
+
+    @if (failed()) {
+      <p class="error" role="alert">{{ t().auth.failed }}</p>
+    }
+
+    <p class="fineprint">
+      {{ t().auth.acceptPrefix }} <a routerLink="/terms">{{ t().auth.termsLink }}</a>
+      {{ t().auth.and }} <a routerLink="/privacy">{{ t().auth.privacyLink }}</a>.
+    </p>
+  </div>
+</main>

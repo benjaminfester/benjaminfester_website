@@ -25,5 +25,20 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./groceries/groceries.component').then((m) => m.GroceriesComponent),
   },
+  // Public on purpose: Google's sign-in consent screen links to these
+  {
+    path: 'privacy',
+    title: 'privacy',
+    data: { doc: 'privacy' },
+    loadComponent: () =>
+      import('./legal/legal.component').then((m) => m.LegalComponent),
+  },
+  {
+    path: 'terms',
+    title: 'terms',
+    data: { doc: 'terms' },
+    loadComponent: () =>
+      import('./legal/legal.component').then((m) => m.LegalComponent),
+  },
   { path: '**', redirectTo: '' },
 ];

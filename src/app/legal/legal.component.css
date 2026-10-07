@@ -1,0 +1,27 @@
+.legal {
+  max-width: 40rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: calc(var(--nav-height) + 2rem) 1rem calc(var(--bottom-nav-height) + 2rem);
+}
+
+h1 { margin: 0 0 0.25rem; font-size: 2.5rem; }
+
+.updated {
+  margin: 0 0 2rem;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+section + section { margin-top: 1.75rem; }
+
+h2 {
+  margin: 0 0 0.5rem;
+  font: 1.125rem "ApercuBold", Arial, sans-serif;
+}
+
+p {
+  margin: 0 0 0.75rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}

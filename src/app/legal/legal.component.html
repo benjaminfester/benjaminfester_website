@@ -1,0 +1,13 @@
+<main class="legal">
+  <h1>{{ title() }}</h1>
+  <p class="updated">{{ t().legal.updated }}</p>
+
+  @for (section of sections(); track section.heading) {
+    <section>
+      <h2>{{ section.heading }}</h2>
+      @for (paragraph of section.paragraphs; track $index) {
+        <p>{{ paragraph }}</p>
+      }
+    </section>
+  }
+</main>

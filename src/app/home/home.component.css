@@ -192,3 +192,21 @@
 .actions .btn i {
   font-size: 1.25rem;
 }
+
+/* Privacy policy and terms: small, but always reachable from the front page */
+
+.legal-links {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.legal-links a {
+  color: inherit;
+}
+
+.legal-links a:hover {
+  color: var(--color-accent);
+}

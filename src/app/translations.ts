@@ -17,12 +17,14 @@ const en = {
     privacy: 'Privacy policy',
     terms: 'Terms of service',
     login: 'Sign in',
+    weekplan: 'Week plan',
   },
   nav: {
     home: 'Home',
     timer: 'Timer',
     todo: 'To do',
     groceries: 'Groceries',
+    weekplan: 'Week plan',
   },
   home: {
     photoAlt: 'Portrait of Benjamin Fester',
@@ -89,6 +91,10 @@ const en = {
     bought: (n: number) => `In the basket (${n})`,
     clear: 'Clear',
     fab: 'Add grocery item',
+  },
+  weekplan: {
+    title: 'Week plan',
+    week: (n: number) => `Week ${n}`,
   },
   auth: {
     title: 'Sign in',
@@ -239,12 +245,14 @@ const da: Translations = {
     privacy: 'Privatlivspolitik',
     terms: 'Servicevilkår',
     login: 'Log ind',
+    weekplan: 'Ugeplan',
   },
   nav: {
     home: 'Hjem',
     timer: 'Timer',
     todo: 'Opgaver',
     groceries: 'Indkøb',
+    weekplan: 'Ugeplan',
   },
   home: {
     photoAlt: 'Portræt af Benjamin Fester',
@@ -310,6 +318,10 @@ const da: Translations = {
     bought: (n: number) => `I kurven (${n})`,
     clear: 'Ryd',
     fab: 'Tilføj vare',
+  },
+  weekplan: {
+    title: 'Ugeplan',
+    week: (n: number) => `Uge ${n}`,
   },
   auth: {
     title: 'Log ind',

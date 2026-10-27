@@ -30,6 +30,13 @@ export const routes: Routes = [
       import('./groceries/groceries.component').then((m) => m.GroceriesComponent),
   },
   {
+    path: 'weekplan',
+    title: 'weekplan',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./weekplan/weekplan.component').then((m) => m.WeekplanComponent),
+  },
+  {
     path: 'login',
     title: 'login',
     loadComponent: () =>

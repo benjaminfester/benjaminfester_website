@@ -1,0 +1,15 @@
+<main class="weekplan">
+  <header>
+    <h1>{{ t().weekplan.title }}</h1>
+    <p class="week">{{ t().weekplan.week(week) }}</p>
+  </header>
+
+  <ol class="days">
+    @for (day of days(); track day.date.getTime()) {
+      <li [class.today]="day.isToday" [attr.aria-current]="day.isToday ? 'date' : null">
+        <span class="weekday">{{ day.weekday }}</span>
+        <span class="date">{{ day.label }}</span>
+      </li>
+    }
+  </ol>
+</main>
